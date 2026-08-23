@@ -1,9 +1,3 @@
-"""HW4: play 3x3 Hexapawn against an Alpha-Beta AI.
-
-Run this file directly and enter moves in algebraic form, for example ``a1 a2``.
-White starts at the bottom of the board and moves upward; Black moves downward.
-"""
-
 from dataclasses import dataclass
 from math import inf
 from typing import Dict, List, Optional, Tuple
@@ -15,8 +9,6 @@ Move = Tuple[Tuple[int, int], Tuple[int, int]]
 
 @dataclass(frozen=True)
 class HexapawnState:
-    """A board maps (file, rank) coordinates to W or B; rank 1 is the bottom."""
-
     to_move: str
     board: Tuple[Tuple[Tuple[int, int], str], ...]
 
@@ -25,8 +17,6 @@ class HexapawnState:
 
 
 class Hexapawn:
-    """The standard 3x3 Hexapawn game, evaluated from White's viewpoint."""
-
     def __init__(self) -> None:
         board = {(file, 0): WHITE for file in range(3)}
         board.update({(file, 2): BLACK for file in range(3)})
@@ -64,12 +54,10 @@ class Hexapawn:
 
     def winner(self, state: HexapawnState) -> Optional[str]:
         board = state.pieces()
-        # Reaching the opponent's back rank wins immediately.
         if any(piece == WHITE and rank == 2 for (_, rank), piece in board.items()):
             return WHITE
         if any(piece == BLACK and rank == 0 for (_, rank), piece in board.items()):
             return BLACK
-        # A player with no legal move loses.
         if not self.actions(state):
             return self.opponent(state.to_move)
         return None
@@ -92,8 +80,6 @@ class Hexapawn:
 
 
 def alpha_beta_search(state: HexapawnState, game: Hexapawn) -> Optional[Move]:
-    """Return the optimal legal move for the player whose turn it is."""
-
     root_player = state.to_move
 
     def value(node: HexapawnState, alpha: float, beta: float) -> float:
@@ -105,14 +91,14 @@ def alpha_beta_search(state: HexapawnState, game: Hexapawn) -> Optional[Move]:
                 best = max(best, value(game.result(node, action), alpha, beta))
                 alpha = max(alpha, best)
                 if alpha >= beta:
-                    break  # beta cut-off
+                    break
             return best
         best = inf
         for action in game.actions(node):
             best = min(best, value(game.result(node, action), alpha, beta))
             beta = min(beta, best)
             if alpha >= beta:
-                break  # alpha cut-off
+                break
         return best
 
     best_move: Optional[Move] = None
@@ -125,8 +111,6 @@ def alpha_beta_search(state: HexapawnState, game: Hexapawn) -> Optional[Move]:
 
 
 def alpha_beta_player(game: Hexapawn, state: HexapawnState) -> Optional[Move]:
-    """Player callback with the same interface as AIMA's alpha_beta_player."""
-
     return alpha_beta_search(state, game)
 
 
@@ -149,8 +133,6 @@ def parse_move(text: str) -> Move:
 
 
 def play_human_vs_ai(human: str = WHITE) -> str:
-    """Run an interactive Human-vs-Alpha-Beta game and return the winner."""
-
     if human not in (WHITE, BLACK):
         raise ValueError("human must be 'W' or 'B'")
     game = Hexapawn()
@@ -180,8 +162,6 @@ def play_human_vs_ai(human: str = WHITE) -> str:
 
 
 class HexapawnGUI:
-    """A click-to-play Tkinter interface; it uses no third-party packages."""
-
     SQUARE = 112
     BOARD_SIZE = SQUARE * 3
 
@@ -315,8 +295,6 @@ class HexapawnGUI:
 
 
 def launch_gui() -> None:
-    """Open the graphical Human-vs-AI version of the assignment."""
-
     HexapawnGUI().run()
 
 
