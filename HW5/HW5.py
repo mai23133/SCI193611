@@ -25,12 +25,12 @@ P_notC = 1 - P_C
 P_T = (P_T_given_C * P_C) + \
       (P_T_given_notC * P_notC)
 
-print("42. =", P_T)
+print(f"42. = {P_T:.4f}")
 
 
 P_C_given_T = (P_T_given_C * P_C) / P_T
 
-print("43. =", P_C_given_T)
+print(f"43. = {P_C_given_T:.3f}")
 
 
 
@@ -43,7 +43,7 @@ P_T_given_S = (
 # ใช้ Bayes
 P_S_given_T = (P_T_given_S * P_S) / P_T
 
-print("44. =", P_S_given_T)
+print(f"44. = {P_S_given_T:.3f}")
 
 
 
@@ -51,4 +51,4 @@ P_C_and_T = P_C * P_T_given_C
 
 people = 1000 * P_C_and_T
 
-print("45. =", people)
+print(f"45. = {people:.0f}")
