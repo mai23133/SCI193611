@@ -1,6 +1,5 @@
 # HW6 — คำอธิบายคำตอบ
 
-งานนี้แยกจาก `aima/probability.ipynb` เป็นสองโน้ตบุ๊ก พร้อมโมดูล `probability.py`, `utils.py` และ `agents.py` ที่ใช้รันโค้ด
 
 ## ชุด 4 ข้อ: Approximate Inference
 
@@ -39,6 +38,3 @@
 
 `fit_hmm` นับ transition และ sensor จากข้อมูลที่ทราบสถานะจริง 5,000 กะ แล้วใช้ Laplace smoothing โดยเริ่มทุกช่องที่ 1 เพื่อไม่ให้ได้ความน่าจะเป็นศูนย์ ผลลัพธ์ที่เรียนได้จึงเข้าใกล้ transition model และ sensor model ที่ใช้สร้างข้อมูล
 
-## การใช้งาน
-
-ติดตั้ง dependency ด้วย `python -m pip install -r requirements.txt` แล้วเปิด `jupyter lab` จากโฟลเดอร์ HW6 ใช้ kernel `ai_course` และรันเซลล์จากบนลงล่าง
